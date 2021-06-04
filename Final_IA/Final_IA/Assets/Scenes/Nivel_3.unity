@@ -1148,7 +1148,7 @@ Transform:
   - {fileID: 1762959575}
   - {fileID: 1915967892}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &654854323
 GameObject:
@@ -1240,7 +1240,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &672742707
 GameObject:
@@ -1457,7 +1457,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &734468959
 GameObject:
@@ -2337,6 +2337,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 4147653036154398135}
+  nombreEscena: Nivel_3
   velocidadDeseada: {x: 0, y: 0, z: 0}
   puntos:
   - {fileID: 289392362}
@@ -2620,7 +2621,7 @@ Transform:
   - {fileID: 1072046925}
   - {fileID: 1679779166}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1679779165
 GameObject:
@@ -2692,6 +2693,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 4147653036154398135}
+  nombreEscena: Nivel_3
   velocidadDeseada: {x: 0, y: 0, z: 0}
   puntos:
   - {fileID: 2035867424}
@@ -2810,7 +2812,7 @@ Transform:
   m_LocalScale: {x: 9.4005, y: 1, z: 5.2635}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1761392504
 GameObject:
@@ -3176,6 +3178,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 4147653036154398135}
+  nombreEscena: Nivel_3
   velocidadDeseada: {x: 0, y: 0, z: 0}
   puntos:
   - {fileID: 947398305}
@@ -3317,6 +3320,71 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1882151371}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &1900313707
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6337427558352530230, guid: 480a14fe3f7061d4e8cdc0afa76bf6b6, type: 3}
+      propertyPath: escena
+      value: Nivel_4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6337427558352530231, guid: 480a14fe3f7061d4e8cdc0afa76bf6b6, type: 3}
+      propertyPath: m_Name
+      value: FinalNivel
+      objectReference: {fileID: 0}
+    - target: {fileID: 6337427558352530232, guid: 480a14fe3f7061d4e8cdc0afa76bf6b6, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6337427558352530232, guid: 480a14fe3f7061d4e8cdc0afa76bf6b6, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 11.270201
+      objectReference: {fileID: 0}
+    - target: {fileID: 6337427558352530232, guid: 480a14fe3f7061d4e8cdc0afa76bf6b6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 43.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 6337427558352530232, guid: 480a14fe3f7061d4e8cdc0afa76bf6b6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0000038146973
+      objectReference: {fileID: 0}
+    - target: {fileID: 6337427558352530232, guid: 480a14fe3f7061d4e8cdc0afa76bf6b6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.26
+      objectReference: {fileID: 0}
+    - target: {fileID: 6337427558352530232, guid: 480a14fe3f7061d4e8cdc0afa76bf6b6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6337427558352530232, guid: 480a14fe3f7061d4e8cdc0afa76bf6b6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6337427558352530232, guid: 480a14fe3f7061d4e8cdc0afa76bf6b6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6337427558352530232, guid: 480a14fe3f7061d4e8cdc0afa76bf6b6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6337427558352530232, guid: 480a14fe3f7061d4e8cdc0afa76bf6b6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6337427558352530232, guid: 480a14fe3f7061d4e8cdc0afa76bf6b6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6337427558352530232, guid: 480a14fe3f7061d4e8cdc0afa76bf6b6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 480a14fe3f7061d4e8cdc0afa76bf6b6, type: 3}
 --- !u!1 &1915967891
 GameObject:
   m_ObjectHideFlags: 0
@@ -3532,7 +3600,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &2000455635
 GameObject:
@@ -4162,6 +4230,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 4147653036154398135}
+  nombreEscena: Nivel_3
   velocidadDeseada: {x: 0, y: 0, z: 0}
   puntos:
   - {fileID: 1596711163}

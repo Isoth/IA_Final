@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class Path : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class Path : MonoBehaviour
 
     bool veoPlayer = false;
     bool ultimaVezVisto = false;
+
+    public string nombreEscena;
 
     //V
     public static Vector3 velocidad;
@@ -171,10 +174,10 @@ public class Path : MonoBehaviour
 
         if (distancia < 1)
         {
-            velocidadDeseada = velocidadDeseada.normalized * speed * (distancia / radioPunto);
-            print("ª");
+            velocidadDeseada = velocidadDeseada.normalized * speed * (distancia / radioPunto);          
             perseguir = false;
             ultimaVezVisto = false;
+            print("ª");
         }
         else
         {
@@ -218,5 +221,13 @@ public class Path : MonoBehaviour
     {
         lastPlayerPos = player.transform.position;
         ultimaVezVisto = true;        
+    }
+
+    private void OnCollisionEnter(Collision col)
+    {
+        if (col.gameObject.tag == "Player"){
+            print("Te pillé puto");
+            SceneManager.LoadScene(nombreEscena);
+        }
     }
 }
