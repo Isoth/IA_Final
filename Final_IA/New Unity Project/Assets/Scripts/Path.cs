@@ -10,23 +10,20 @@ public class Path : MonoBehaviour
     Vector3 playerPos;
     Vector3 lastPlayerPos;
 
-    public GameObject player;
-    public GameObject particulas;
+    public GameObject player;    
 
-    private bool veoPlayer = false;
-    private bool ultimaVezVisto = false;
-    private bool dashActivo = true;
-    private bool explosion= false;
+    bool veoPlayer = false;
+    bool ultimaVezVisto = false;
 
     public string nombreEscena;
 
     //V
-    private Vector3 velocidad;
+    public static Vector3 velocidad;
 
     //VD
-    private Vector3 velocidadDeseada;
+    public Vector3 velocidadDeseada;
 
-    [SerializeField] GameObject[] puntos;
+    public GameObject[] puntos;
 
     public float radioPunto = 10f;
     public float speed = 4f;
@@ -35,9 +32,9 @@ public class Path : MonoBehaviour
 
     float distancia;
 
-    private int contador;
+    int contador;
 
-    private bool perseguir = false;
+    bool perseguir = false;
 
     public NavMeshAgent agent;
 
@@ -67,9 +64,11 @@ public class Path : MonoBehaviour
             UltimaPosPlayer();
         }
 
+        LayerMask mask = LayerMask.GetMask("Player");
+
         RaycastHit rayHit;
  
-        if (Physics.Raycast(transform.position, (player.transform.position - transform.position), out rayHit, 8)){
+        if (Physics.Raycast(transform.position, (player.transform.position - transform.position), out rayHit, mask)){
             
             Debug.DrawLine(transform.position, rayHit.point, Color.red);
             
@@ -85,7 +84,7 @@ public class Path : MonoBehaviour
     }
 
     // Update is called once per frame
-    private void cambiarPunto()
+    void cambiarPunto()
     {
         if (contador < puntos.Length)
         {
@@ -126,10 +125,12 @@ public class Path : MonoBehaviour
         {
             velocidadDeseada = velocidadDeseada.normalized * speed * (distancia / radioPunto);
             cambiarPunto();
+            print("dentro");
         }
         else
         {
             velocidadDeseada = velocidadDeseada.normalized * speed;
+            print("fuera");
         }
 
         //Limitamos la velocidad de rotación.
@@ -138,7 +139,7 @@ public class Path : MonoBehaviour
 
         //Limitamos velocidad.
         velocidad = Vector3.ClampMagnitude(velocidad + steering, speed);
-        print(velocidad);
+
 
         //Aplicamos vectores y velocidades.
         this.transform.position += velocidad * Time.deltaTime;
@@ -156,40 +157,26 @@ public class Path : MonoBehaviour
         agent.SetDestination(player.transform.position);
 
         //Dash o Placaje
-        distancia = Vector3.Distance(player.transform.position, this.transform.position);
-        if (distancia <= 4 && distancia > 1.01 && dashActivo)
+        distancia = Vector3.Distance(target, this.transform.position);
+        if (distancia < 2)
         {
-            print("dash");
-            agent.speed *= 5;
-            dashActivo = false;
-        }
-        else if (distancia > 4)
-        {
-            agent.speed = 4;
-            dashActivo = true;
-        }
-        if (distancia <= 1.01)
-        {
-            Destroy(this.gameObject, 1);
-            Instantiate(particulas, this.transform.position, Quaternion.identity);
-            explosion = true;
+            // PLACAR O DISPARAR
         }
     }
 
     private void UltimaPosPlayer()
     {
-        //Calculamos la dirección en la que se vió por última vez al enemigo.
-        /*velocidadDeseada = (lastPlayerPos - this.transform.position).normalized * speed;
+        //Calculamos la dirección a la que quiere ir el enemigo.
+        velocidadDeseada = (lastPlayerPos - this.transform.position).normalized * speed;
 
         //Si entra en el radio, reduce la velocidad.
         distancia = Vector3.Distance(lastPlayerPos, this.transform.position);
 
-        if (distancia < radioPunto)
+        if (distancia < 1)
         {
             velocidadDeseada = velocidadDeseada.normalized * speed * (distancia / radioPunto);          
             perseguir = false;
             ultimaVezVisto = false;
-            cambiarPunto();
             print("ª");
         }
         else
@@ -211,53 +198,29 @@ public class Path : MonoBehaviour
 
 
         //Guía para ver si los vectores de velocidad y velocidadDeseada se comportan como deberían.
-        Debug.DrawRay(this.transform.position, velocidad, Color.green);
-        Debug.DrawRay(this.transform.position, velocidadDeseada, Color.white);*/
+        Debug.DrawRay(this.transform.position, velocidad, Color.magenta);
+        Debug.DrawRay(this.transform.position, velocidadDeseada, Color.cyan);
 
-        agent.SetDestination(lastPlayerPos);
-
-        distancia = Vector3.Distance(lastPlayerPos, this.transform.position);
-
-        if (distancia < radioPunto)
-        {     
-            perseguir = false;
-            ultimaVezVisto = false;
-            Destroy(this.gameObject, 1);
-            Instantiate(particulas, this.transform.position, Quaternion.identity);
-            explosion = true;
-            print("ª");
-        }
-        
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player" && veoPlayer == true)
+        if (other.tag == "Player" && veoPlayer)
         {
-            if (explosion){
-                SceneManager.LoadScene(nombreEscena);
-            }
             perseguir = true;  
         }         
     }
     private void OnTriggerStay(Collider other)
     {
-        if (other.tag == "Player" && veoPlayer == true)
+        if (other.tag == "Player" && veoPlayer)
         {
-            if (explosion){
-                SceneManager.LoadScene(nombreEscena);
-            }
             perseguir = true;  
         } 
     }
     private void OnTriggerExit(Collider other)
     {
-        if (veoPlayer == true)
-        {
-            lastPlayerPos = player.transform.position;
-            target = lastPlayerPos;
-            ultimaVezVisto = true; 
-        }         
+        lastPlayerPos = player.transform.position;
+        ultimaVezVisto = true;        
     }
 
     private void OnCollisionEnter(Collision col)
