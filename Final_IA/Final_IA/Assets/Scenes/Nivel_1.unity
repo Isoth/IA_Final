@@ -158,6 +158,10 @@ PrefabInstance:
       propertyPath: puntos.Array.data[2]
       value: 
       objectReference: {fileID: 1915292697}
+    - target: {fileID: 1468337649126190543, guid: f7bd7ba474a7b524aac09cd6ad78db9e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1554a41424966e24d8d52ffddaf09cb5, type: 2}
     - target: {fileID: 1673141704513367397, guid: f7bd7ba474a7b524aac09cd6ad78db9e, type: 3}
       propertyPath: m_Name
       value: Enemy (1)
@@ -553,6 +557,10 @@ PrefabInstance:
       propertyPath: puntos.Array.data[3]
       value: 
       objectReference: {fileID: 308017600}
+    - target: {fileID: 1468337649126190543, guid: f7bd7ba474a7b524aac09cd6ad78db9e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1554a41424966e24d8d52ffddaf09cb5, type: 2}
     - target: {fileID: 1673141704513367397, guid: f7bd7ba474a7b524aac09cd6ad78db9e, type: 3}
       propertyPath: m_Name
       value: Enemy (3)
@@ -2393,6 +2401,10 @@ PrefabInstance:
       propertyPath: puntos.Array.data[2]
       value: 
       objectReference: {fileID: 549734807}
+    - target: {fileID: 1468337649126190543, guid: f7bd7ba474a7b524aac09cd6ad78db9e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1554a41424966e24d8d52ffddaf09cb5, type: 2}
     - target: {fileID: 1673141704513367397, guid: f7bd7ba474a7b524aac09cd6ad78db9e, type: 3}
       propertyPath: m_Name
       value: Enemy (2)
