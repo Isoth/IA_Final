@@ -1,10 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Path : MonoBehaviour
 {
     Vector3 target;
+    Vector3 playerPos;
+    Vector3 lastPlayerPos;
+
+    public GameObject player;    
+
+    bool veoPlayer = false;
+    bool ultimaVezVisto = false;
 
     //V
     public static Vector3 velocidad;
@@ -23,21 +31,53 @@ public class Path : MonoBehaviour
 
     int contador;
 
-    bool huir = false;
+    bool perseguir = false;
+
+    public NavMeshAgent agent;
 
     // Start is called before the first frame update
     void Start()
     {
         contador = 0;
         target = puntos[contador].transform.position;
+        agent = GetComponent<NavMeshAgent>();
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     void Update()
     {
-        if (huir == false)
+        playerPos = player.transform.position;
+
+        if (perseguir == false && ultimaVezVisto == false)
+        {
             IrAPunto();
-        if (huir == true)
-            Huir();
+        }          
+        if (perseguir == true && ultimaVezVisto == false)
+        {
+            Perseguir();
+        }  
+        if (ultimaVezVisto == true)
+        {
+            UltimaPosPlayer();
+        }
+
+        LayerMask mask = LayerMask.GetMask("Player");
+
+        RaycastHit rayHit;
+ 
+        if (Physics.Raycast(transform.position, (player.transform.position - transform.position), out rayHit, mask)){
+            
+            Debug.DrawLine(transform.position, rayHit.point, Color.red);
+            
+            if (rayHit.collider.tag == "Player"){
+                print("Buenos días");
+                veoPlayer = true;
+            }
+            else
+            {
+                veoPlayer = false;
+            }
+        }
     }
 
     // Update is called once per frame
@@ -75,7 +115,7 @@ public class Path : MonoBehaviour
         //Calculamos la dirección a la que quiere ir el enemigo.
         velocidadDeseada = (target - this.transform.position).normalized * speed;
 
-        //Si entra en el radio, reduce la velocidad.
+        //Distancia hasta target.
         distancia = Vector3.Distance(target, this.transform.position);
 
         if (distancia < radioPunto)
@@ -108,24 +148,37 @@ public class Path : MonoBehaviour
         Debug.DrawRay(this.transform.position, velocidadDeseada, Color.cyan);
 
     }
-    private void Huir()
+
+    private void Perseguir()
+    {
+        agent.SetDestination(player.transform.position);
+
+        //Dash o Placaje
+        distancia = Vector3.Distance(target, this.transform.position);
+        if (distancia < 2)
+        {
+            // PLACAR O DISPARAR
+        }
+    }
+
+    private void UltimaPosPlayer()
     {
         //Calculamos la dirección a la que quiere ir el enemigo.
-        velocidadDeseada = (target - this.transform.position).normalized * speed;
+        velocidadDeseada = (lastPlayerPos - this.transform.position).normalized * speed;
 
         //Si entra en el radio, reduce la velocidad.
-        distancia = Vector3.Distance(target, this.transform.position);
+        distancia = Vector3.Distance(lastPlayerPos, this.transform.position);
 
-        if (distancia < radioPunto)
+        if (distancia < 1)
         {
             velocidadDeseada = velocidadDeseada.normalized * speed * (distancia / radioPunto);
-            cambiarPunto();
-            print("dentro");
+            print("ª");
+            perseguir = false;
+            ultimaVezVisto = false;
         }
         else
         {
             velocidadDeseada = velocidadDeseada.normalized * speed;
-            print("fuera");
         }
 
         //Limitamos la velocidad de rotación.
@@ -137,8 +190,8 @@ public class Path : MonoBehaviour
 
 
         //Aplicamos vectores y velocidades.
-        this.transform.position -= velocidad * Time.deltaTime;
-        transform.forward = -velocidad.normalized;
+        this.transform.position += velocidad * Time.deltaTime;
+        transform.forward = velocidad.normalized;
 
 
         //Guía para ver si los vectores de velocidad y velocidadDeseada se comportan como deberían.
@@ -146,12 +199,24 @@ public class Path : MonoBehaviour
         Debug.DrawRay(this.transform.position, velocidadDeseada, Color.cyan);
 
     }
+
     private void OnTriggerEnter(Collider other)
     {
-        huir = true;
+        if (other.tag == "Player" && veoPlayer)
+        {
+            perseguir = true;  
+        }         
+    }
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.tag == "Player" && veoPlayer)
+        {
+            perseguir = true;  
+        } 
     }
     private void OnTriggerExit(Collider other)
     {
-        huir = false;
+        lastPlayerPos = player.transform.position;
+        ultimaVezVisto = true;        
     }
 }
